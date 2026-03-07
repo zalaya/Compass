@@ -7,7 +7,8 @@ export default [
     rules: {
       semi: ['error', 'never'],
       quotes: ['error', 'single'],
-      'comma-dangle': ['error', 'never']
+      'comma-dangle': ['error', 'never'],
+      'indent': ['error', 2]
     }
   }
 ]
