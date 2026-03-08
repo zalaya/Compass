@@ -1,44 +1,65 @@
 import { ComponentPropsWithoutRef } from 'react'
 
-const Root = (props: ComponentPropsWithoutRef<'table'>) => (
-  <table data-slot='table' {...props} />
+export const Table = ({ className, ... props }: ComponentPropsWithoutRef<'table'>) => (
+  <table
+    data-slot='table'
+    className={className}
+    {...props}
+  />
 )
 
-const Header = (props: ComponentPropsWithoutRef<'thead'>) => (
-  <thead data-slot='table-header' {...props} />
+export const TableHeader = ({ className, ... props }: ComponentPropsWithoutRef<'thead'>) => (
+  <thead
+    data-slot='table-header'
+    className={className}
+    {...props}
+  />
 )
 
-const Body = (props: ComponentPropsWithoutRef<'tbody'>) => (
-  <tbody data-slot='table-body' {...props} />
+export const TableBody = ({ className, ... props }: ComponentPropsWithoutRef<'tbody'>) => (
+  <tbody
+    data-slot='table-body'
+    className={className}
+    {...props}
+  />
 )
 
-const Footer = (props: ComponentPropsWithoutRef<'tfoot'>) => (
-  <tfoot data-slot='table-footer' {...props} />
+export const TableFooter = ({ className, ... props }: ComponentPropsWithoutRef<'tfoot'>) => (
+  <tfoot
+    data-slot='table-footer'
+    className={className}
+    {...props}
+  />
 )
 
-const Row = (props: ComponentPropsWithoutRef<'tr'>) => (
-  <tr data-slot='table-row' {...props} />
+export const TableRow = ({ className, ... props }: ComponentPropsWithoutRef<'tr'>) => (
+  <tr
+    data-slot='table-row'
+    className={className}
+    {...props}
+  />
 )
 
-const Column = (props: ComponentPropsWithoutRef<'th'>) => (
-  <th data-slot='table-column' {...props} />
+export const TableColumn = ({ className, ... props }: ComponentPropsWithoutRef<'th'>) => (
+  <th
+    data-slot='table-column'
+    className={className}
+    {...props}
+  />
 )
 
-const Cell = (props: ComponentPropsWithoutRef<'td'>) => (
-  <td data-slot='table-cell' {...props} />
+export const TableCell = ({ className, ... props }: ComponentPropsWithoutRef<'td'>) => (
+  <td
+    data-slot='table-cell'
+    className={className}
+    {...props}
+  />
 )
 
-const Caption = (props: ComponentPropsWithoutRef<'caption'>) => (
-  <caption data-slot='table-caption' {...props} />
+export const TableCaption = ({ className, ... props }: ComponentPropsWithoutRef<'caption'>) => (
+  <caption
+    data-slot='table-caption'
+    className={className}
+    {...props}
+  />
 )
-
-export const Table = {
-  Root,
-  Header,
-  Body,
-  Footer,
-  Row,
-  Column,
-  Cell,
-  Caption
-}

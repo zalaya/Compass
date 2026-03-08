@@ -1,16 +1,29 @@
-import { Controller,  ControllerProps,  FieldPath,  FieldValues,  FormProvider,  useFormContext,  UseFormReturn } from 'react-hook-form'
-import { ComponentProps, FormHTMLAttributes, HTMLAttributes, PropsWithChildren, useId } from 'react'
-import { Slot } from '@radix-ui/react-slot'
+import {
+  Controller, ControllerProps,
+  ControllerRenderProps, FieldPath, FieldValues, FormProvider, useFormContext, UseFormReturn
+} from 'react-hook-form'
+import {
+  Children,
+  cloneElement,
+  ComponentProps,
+  FormHTMLAttributes, forwardRef,
+  HTMLAttributes, isValidElement,
+  PropsWithChildren,
+  ReactElement, ReactNode,
+  useId
+} from 'react'
+import * as Slot from '@radix-ui/react-slot'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { useFormField } from '@/components/ui/Form/use-form-field'
 import { FormFieldContext } from '@/components/ui/Form/FormFieldContext'
+import { FormItemContext } from '@/components/ui/Form/FormItemContext'
 
-type RootProps<T extends FieldValues> = PropsWithChildren<{
+type FormProps<T extends FieldValues> = PropsWithChildren<{
   form: UseFormReturn<T>
   onSubmit: (values: T) => void
 } & FormHTMLAttributes<HTMLFormElement>>
 
-const Root = <T extends FieldValues>({ children, form, onSubmit, ...props }: RootProps<T>) => {
+export const Form = <T extends FieldValues>({ children, form, onSubmit, ...props }: FormProps<T>) => {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} {...props} >
@@ -20,60 +33,87 @@ const Root = <T extends FieldValues>({ children, form, onSubmit, ...props }: Roo
   )
 }
 
-const Control = (props: ComponentProps<typeof Slot>) => {
-  const { id, invalid, error } = useFormField()
+const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
+  const id = useId()
 
   return (
-    <Slot
+    <FormItemContext.Provider value={{ id }}>
+      <div
+        ref={ref}
+        data-slot='form-item'
+        className={className}
+        {...props}
+      />
+    </FormItemContext.Provider>
+  )
+})
+
+export const FormControl = (props: ComponentProps<typeof Slot.Root>) => {
+  const { error, invalid, formItemId, formDescriptionId, formMessageId } = useFormField()
+
+  return (
+    <Slot.Root
       data-slot='form-control'
-      id={id}
-      aria-invalid={invalid}
+      id={formItemId}
       aria-describedby={
-        !error
-          ? `${id}-description`
-          : `${id}-description ${id}-message`
+        error
+          ? `${formDescriptionId} ${formMessageId}`
+          : formDescriptionId
       }
+      aria-invalid={invalid}
       {...props}
     />
   )
 }
 
-type FieldProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = Omit<ControllerProps<TFieldValues, TName>, 'control'>
+type FormFieldProps<TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>> = Omit<ControllerProps<TFieldValues, TName>, 'control' | 'render'> & {
+  className?: string
+  children: ReactNode
+}
 
-const Field = <TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ name, render, ...props }: FieldProps<TFieldValues, TName>) => {
+export const FormField = <TFieldValues extends FieldValues, TName extends FieldPath<TFieldValues>>({ name, children, className, ...props }: FormFieldProps<TFieldValues, TName>) => {
   const { control } = useFormContext<TFieldValues>()
-  const id = useId()
 
   return (
-    <FormFieldContext.Provider value={{ id, name }}>
+    <FormFieldContext.Provider value={{ name }}>
       <Controller
         name={name}
         control={control}
-        render={(renderProps) => (
-          <Control>
-            {render(renderProps)}
-          </Control>
-        )}
+        render={({ field }) => {
+          const injectField = (child: ReactNode) => {
+            if (!isValidElement(child)) return child
+            if (child.type === FormControl) return cloneElement(child, { ...field })
+
+            return child
+          }
+
+          return (
+            <FormItem className={className}>
+              {Children.map(children, injectField)}
+            </FormItem>
+          )
+        }}
         {...props}
       />
     </FormFieldContext.Provider>
   )
 }
 
-const Description = (props: HTMLAttributes<HTMLParagraphElement>) => {
-  const { id } = useFormField()
+export const FormDescription = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => {
+  const { formDescriptionId } = useFormField()
 
   return (
     <p
       data-slot='form-description'
-      id={`${id}-description`}
+      id={formDescriptionId}
+      className={className}
       {...props}
     />
   )
 }
 
-const Message = (props: ComponentProps<'p'>) => {
-  const { error, id } = useFormField()
+export const FormMessage = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => {
+  const { error, formMessageId } = useFormField()
   const content = error ? String(error?.message ?? '') : props.children
 
   if (!content) {
@@ -83,7 +123,8 @@ const Message = (props: ComponentProps<'p'>) => {
   return (
     <p
       data-slot='form-message'
-      id={`${id}-message`}
+      id={formMessageId}
+      className={className}
       {...props}
     >
       {content}
@@ -91,24 +132,16 @@ const Message = (props: ComponentProps<'p'>) => {
   )
 }
 
-const Label = (props: ComponentProps<typeof LabelPrimitive.Root>) =>  {
-  const { id, error } = useFormField()
+export const FormLabel = ({ className, ...props }: ComponentProps<typeof LabelPrimitive.Root>) =>  {
+  const { invalid, formItemId } = useFormField()
 
   return (
     <LabelPrimitive.Root
       data-slot='form-label'
-      htmlFor={id}
-      data-error={!!error}
+      htmlFor={formItemId}
+      data-invalid={invalid}
+      className={className}
       {...props}
     />
   )
-}
-
-export const Form = {
-  Root,
-  Field,
-  Control,
-  Label,
-  Description,
-  Message
 }
