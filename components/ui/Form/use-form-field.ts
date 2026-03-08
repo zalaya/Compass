@@ -1,4 +1,4 @@
-import { FormFieldContext } from '@/components/ui/Form/FormField/FormFieldContext'
+import { FormFieldContext } from '@/components/ui/Form/FormFieldContext'
 import { useContext } from 'react'
 import { useFormContext } from 'react-hook-form'
 
@@ -6,7 +6,7 @@ export function useFormField() {
   const context = useContext(FormFieldContext)
 
   if (!context) {
-    throw new Error('useFormField must be used within a FormField')
+    throw new Error('useFormField must be used within a Form.Field')
   }
 
   const { id, name } = context

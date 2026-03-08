@@ -11,7 +11,8 @@ export default [
       'comma-dangle': ['error', 'never'],
       'indent': ['error', 2],
       'object-curly-spacing': ['error', 'always'],
-      'eol-last': ['error', 'always']
+      'eol-last': ['error', 'always'],
+      'jsx-quotes': ['error', 'prefer-single']
     }
   }
 ]
