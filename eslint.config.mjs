@@ -1,6 +1,7 @@
 import tsParser from '@typescript-eslint/parser'
 
 export default [
+  { ignores: ['node_modules/**', '.next/**'] },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.mjs'],
     languageOptions: { parser: tsParser },

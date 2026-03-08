@@ -1,7 +1,7 @@
 import { Controller, ControllerProps, FieldPath, FieldValues, useFormContext } from 'react-hook-form'
 import { FormFieldContext } from '@/components/ui/Form/FormField/FormFieldContext'
 import { useId } from 'react'
-import FormControl from '@/components/ui/Form/FormControl'
+import FormFieldControl from '@/components/ui/Form/FormField/FormFieldControl'
 
 type FormFieldProps<
   TFieldValues extends FieldValues,
@@ -22,9 +22,9 @@ export default function FormField<
         name={name}
         control={control}
         render={(controllerProps) => (
-          <FormControl>
+          <FormFieldControl>
             {restProps.render(controllerProps)}
-          </FormControl>
+          </FormFieldControl>
         )}
       />
     </FormFieldContext.Provider>

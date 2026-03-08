@@ -4,7 +4,7 @@ import { useFormField } from '@/components/ui/Form/use-form-field'
 
 type FormControlProps = ComponentProps<typeof Slot>
 
-export default function FormControl(props: FormControlProps) {
+export default function FormFieldControl(props: FormControlProps) {
   const { id, invalid } = useFormField()
 
   return (
@@ -12,6 +12,7 @@ export default function FormControl(props: FormControlProps) {
       data-slot="form-control"
       id={id}
       aria-invalid={invalid}
+      aria-describedby={`${id}-description`}
       {...props}
     />
   )
