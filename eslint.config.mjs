@@ -8,7 +8,9 @@ export default [
       semi: ['error', 'never'],
       quotes: ['error', 'single'],
       'comma-dangle': ['error', 'never'],
-      'indent': ['error', 2]
+      'indent': ['error', 2],
+      'object-curly-spacing': ['error', 'always'],
+      'eol-last': ['error', 'always']
     }
   }
 ]
