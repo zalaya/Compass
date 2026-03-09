@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { FormField } from '@/components/ui/form/form-field'
-import { Input } from '@/components/ui/input'
+import { PasswordInput } from '@/components/ui/password-input'
+import { TextInput } from '@/components/ui/text-input'
 import { loginAction } from '@/modules/auth/login-action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 
@@ -27,10 +28,10 @@ export default function LoginForm() {
     <Form form={form} onSubmit={onSubmit} className='space-y-6'>
       <div className='space-y-4'>
         <FormField name='email' label='Email'>
-          <Input type='email' placeholder='email@example.com' />
+          <TextInput type='email' placeholder='email@example.com' />
         </FormField>
         <FormField name='password' label='Password'>
-          <Input type='password' placeholder='12345678' />
+          <PasswordInput placeholder='12345678' />
         </FormField>
       </div>
 

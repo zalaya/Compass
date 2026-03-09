@@ -1,7 +1,7 @@
 import { forwardRef, InputHTMLAttributes } from 'react'
 import { cn } from '@/components/cn'
 
-export const Input = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ type = 'text', className, ...props }, ref) => {
+export const TextInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ type = 'text', className, ...props }, ref) => {
   return (
     <input
       ref={ref}
