@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { FormField } from '@/components/ui/form/form-field'
 import { Input } from '@/components/ui/input'
-import { loginAction } from '@/modules/auth/login-action'
+import { loginAction } from '@/modules/auth/login/login-action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 
 export default function LoginForm() {
