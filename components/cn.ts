@@ -6,6 +6,6 @@ import { type ClassValue, clsx } from 'clsx'
  * @param inputs An array of class names, which can be strings, objects, or arrays.
  * @returns A string of class names.
  */
-export function cn(...inputs: ClassValue[]) {
+export const cn = (...inputs: ClassValue[]) => {
   return clsx(inputs)
 }
