@@ -13,9 +13,7 @@ export const { handlers, signIn } = NextAuth({
       async authorize(credentials) {
         const result = loginSchema.safeParse(credentials)
 
-        if (!result.success) {
-          return null
-        }
+        if (!result.success) return null
 
         return {
           id: '1',

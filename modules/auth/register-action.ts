@@ -4,19 +4,15 @@ import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 export async function registerAction(values: RegisterValues) {
   const result = registerSchema.safeParse(values)
 
-  if (!result.success) {
-    throw new Error('Invalid data')
-  }
+  if (!result.success) throw new Error('Invalid result')
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/register`, {
+  const response = await fetch(`${process.env.APP_URL}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(result.data)
   })
 
-  if (!response.ok) {
-    throw new Error('Register failed')
-  }
+  if (!response.ok) throw new Error('Register failed')
 
   await signIn('credentials', {
     email: result.data.email,
