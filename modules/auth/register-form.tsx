@@ -2,11 +2,12 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from '@/auth'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { FormField } from '@/components/ui/form/form-field'
 import { Input } from '@/components/ui/input'
+import { registerAction } from '@/modules/auth/register-action'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 
 export default function RegisterForm() {
@@ -20,22 +21,7 @@ export default function RegisterForm() {
   })
 
   async function onSubmit(values: RegisterValues) {
-    const response = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values)
-    })
-
-    if (!response.ok) {
-      console.error('Register failed')
-      return
-    }
-
-    await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      callbackUrl: '/'
-    })
+    await registerAction(values)
   }
 
   return (
@@ -53,6 +39,13 @@ export default function RegisterForm() {
       <Button type='submit'>
         Register
       </Button>
+
+      <p>
+        Already have an account?{' '}
+        <Link href='/auth/login'>
+          Log in
+        </Link>
+      </p>
     </Form>
   )
 }

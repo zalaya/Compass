@@ -2,11 +2,12 @@
 
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { signIn } from '@/auth'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { FormField } from '@/components/ui/form/form-field'
 import { Input } from '@/components/ui/input'
+import { loginAction } from '@/modules/auth/login-action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 
 export default function LoginForm() {
@@ -19,11 +20,7 @@ export default function LoginForm() {
   })
 
   async function onSubmit(values: LoginValues) {
-    await signIn('credentials', {
-      email: values.email,
-      password: values.password,
-      callbackUrl: '/'
-    })
+    await loginAction(values)
   }
 
   return (
@@ -36,8 +33,15 @@ export default function LoginForm() {
       </FormField>
 
       <Button type='submit'>
-        Log In
+        Log in
       </Button>
+
+      <p>
+        Don't have an account?{' '}
+        <Link href='/auth/register'>
+          Register
+        </Link>
+      </p>
     </Form>
   )
 }
