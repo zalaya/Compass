@@ -1,5 +1,6 @@
 import { ComponentProps } from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
+import { cn } from '@/components/cn'
 import { useFormField } from '@/components/ui/form/use-form-field'
 
 export const FormLabel = ({ className, ...props }: ComponentProps<typeof LabelPrimitive.Root>) =>  {
@@ -10,7 +11,10 @@ export const FormLabel = ({ className, ...props }: ComponentProps<typeof LabelPr
       data-slot='form-label'
       htmlFor={formItemId}
       data-invalid={invalid}
-      className={className}
+      className={cn(
+        'text-sm',
+        className
+      )}
       {...props}
     />
   )

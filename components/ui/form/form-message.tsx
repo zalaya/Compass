@@ -15,7 +15,7 @@ export const FormMessage = ({ className, ...props }: HTMLAttributes<HTMLParagrap
       data-slot='form-message'
       id={formMessageId}
       className={cn(
-        'text-red-500',
+        'text-red-500 text-sm',
         className
       )}
       {...props}

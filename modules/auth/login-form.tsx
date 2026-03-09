@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 import { FormField } from '@/components/ui/form/form-field'
 import { Input } from '@/components/ui/input'
-import { loginAction } from '@/modules/auth/login/login-action'
+import { loginAction } from '@/modules/auth/login-action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 
 export default function LoginForm() {
@@ -24,21 +24,26 @@ export default function LoginForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} className='space-y-4'>
-      <FormField name='email' label='Email'>
-        <Input type='email' placeholder='email@example.com' />
-      </FormField>
-      <FormField name='password' label='Password'>
-        <Input type='password' placeholder='********' />
-      </FormField>
+    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
+      <div className='space-y-4'>
+        <FormField name='email' label='Email'>
+          <Input type='email' placeholder='email@example.com' />
+        </FormField>
+        <FormField name='password' label='Password'>
+          <Input type='password' placeholder='12345678' />
+        </FormField>
+      </div>
 
-      <Button type='submit'>
+      <Button type='submit' className='w-full'>
         Log in
       </Button>
 
-      <p>
+      <p className='text-center text-sm text-neutral-600'>
         Don't have an account?{' '}
-        <Link href='/auth/register'>
+        <Link
+          href='/auth/register'
+          className='font-medium text-neutral-900 hover:underline'
+        >
           Register
         </Link>
       </p>
