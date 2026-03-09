@@ -1,3 +1,5 @@
+'use client'
+
 import { cloneElement, ReactElement, ReactNode } from 'react'
 import { Controller, ControllerProps, FieldPath, FieldValues, useFormContext } from 'react-hook-form'
 import { FormControl } from '@/components/ui/form/form-control'

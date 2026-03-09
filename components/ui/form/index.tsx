@@ -1,10 +1,10 @@
 import { FormHTMLAttributes, PropsWithChildren } from 'react'
-import { FieldValues, FormProvider, UseFormReturn } from 'react-hook-form'
+import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from 'react-hook-form'
 
 type FormProps<T extends FieldValues> = PropsWithChildren<{
   form: UseFormReturn<T>
-  onSubmit: (values: T) => void
-} & FormHTMLAttributes<HTMLFormElement>>
+  onSubmit: SubmitHandler<T>
+} & Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>>
 
 export const Form = <T extends FieldValues>({ children, form, onSubmit, ...props }: FormProps<T>) => {
   return (
