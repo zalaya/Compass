@@ -6,9 +6,10 @@
     "development": "next dev",
     "build": "next build",
     "production": "next start",
+    "clean": "bunx rimraf node_modules/ .next/",
     "update": "bunx npm-check-updates -u && bun install",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "format": "eslint . --fix"
   },
   "dependencies": {
     "clsx": "^2.1.1",
