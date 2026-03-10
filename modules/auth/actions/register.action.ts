@@ -1,3 +1,5 @@
+'use server'
+
 import { signIn } from '@/auth'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 
@@ -6,7 +8,7 @@ export async function registerAction(values: RegisterValues) {
 
   if (!success) throw new Error('Invalid result')
 
-  const response = await fetch('/api/auth/register', {
+  const response = await fetch(`${process.env.APP_URL}/api/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)

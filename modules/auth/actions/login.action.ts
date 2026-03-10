@@ -1,3 +1,5 @@
+'use server'
+
 import { signIn } from '@/auth'
 import { LoginValues } from '@/modules/auth/schema'
 
