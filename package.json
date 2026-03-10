@@ -6,7 +6,7 @@
     "development": "next dev",
     "build": "next build",
     "production": "next start",
-    "clean": "bunx rimraf node_modules/ .next/",
+    "clean": "bunx rimraf node_modules/ .next/ generated/",
     "update": "bunx npm-check-updates -u && bun install",
     "lint": "eslint .",
     "format": "eslint . --fix",
