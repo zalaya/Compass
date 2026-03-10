@@ -1,17 +1,16 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { loginAction } from '@/actions/auth/login.action'
 import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
-import PasswordInput from '@/components/ui/Input/PasswordInput'
 import Input from '@/components/ui/Input/Input'
+import PasswordInput from '@/components/ui/Input/PasswordInput'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 import { cn } from '@/shared/cn'
+import { useZodForm } from '@/shared/use-zod-form'
 
 const defaultValues: LoginValues = {
   email: '',
@@ -19,8 +18,8 @@ const defaultValues: LoginValues = {
 }
 
 export default function LoginForm() {
-  const form = useForm<LoginValues>({
-    resolver: zodResolver(loginSchema),
+  const form = useZodForm({
+    schema: loginSchema,
     defaultValues
   })
 
@@ -35,7 +34,7 @@ export default function LoginForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} schema={loginSchema} className='space-y-6'>
+    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
       <div className='space-y-4'>
         <FormField name='email' label='Email'>
           <Input type='email' placeholder='email@example.com' />

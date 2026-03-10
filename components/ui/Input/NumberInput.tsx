@@ -6,9 +6,9 @@ import { ChevronDown,ChevronUp } from 'lucide-react'
 import Input from '@/components/ui/Input/Input'
 import { cn } from '@/shared/cn'
 
-type NumericInputProps = InputHTMLAttributes<HTMLInputElement>
+type NumberInputProps = InputHTMLAttributes<HTMLInputElement>
 
-const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(({ className, step = 1, min, max, ...props }, ref) => {
+const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(({ className, step = 1, min, max, ...props }, ref) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   function handleStep(direction: 'up' | 'down') {
@@ -82,4 +82,4 @@ const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(({ classNam
 }
 )
 
-export default NumericInput
+export default NumberInput
