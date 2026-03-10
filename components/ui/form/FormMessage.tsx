@@ -16,7 +16,7 @@ export default function FormMessage({ className, ...props }: FormMessageProps) {
       data-slot='form-message'
       id={formMessageId}
       className={cn(
-        'text-red-500 text-sm',
+        'text-red-500 text-sm font-medium',
         className
       )}
       {...props}

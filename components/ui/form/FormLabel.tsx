@@ -12,7 +12,7 @@ export default function FormLabel({ className, ...props }: ComponentProps<typeof
       htmlFor={formItemId}
       data-invalid={invalid}
       className={cn(
-        'text-sm',
+        'text-sm font-medium',
         className
       )}
       {...props}
