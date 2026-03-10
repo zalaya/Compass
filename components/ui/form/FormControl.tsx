@@ -1,3 +1,5 @@
+'use client'
+
 import { ComponentProps, forwardRef } from 'react'
 import * as Slot from '@radix-ui/react-slot'
 import { useFormField } from '@/components/ui/Form/use-form-field'

@@ -1,3 +1,5 @@
+'use client'
+
 import { HTMLAttributes } from 'react'
 import { useFormField } from '@/components/ui/Form/use-form-field'
 import { cn } from '@/shared/cn'
