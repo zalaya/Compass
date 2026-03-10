@@ -1,12 +1,13 @@
 import { HTMLAttributes } from 'react'
-import { cn } from '@/components/cn'
 import { useFormField } from '@/components/ui/Form/use-form-field'
+import { cn } from '@/shared/cn'
 
-export default function FormMessage({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
+type FormMessageProps = Omit<HTMLAttributes<HTMLParagraphElement>, 'children'>
+
+export default function FormMessage({ className, ...props }: FormMessageProps) {
   const { error, formMessageId } = useFormField()
-  const content = error ? String(error?.message ?? '') : props.children
 
-  if (!content) {
+  if (!error?.message) {
     return null
   }
 
@@ -20,7 +21,7 @@ export default function FormMessage({ className, ...props }: HTMLAttributes<HTML
       )}
       {...props}
     >
-      {content}
+      {String(error.message)}
     </p>
   )
 }

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
-import { cn } from '@/components/cn'
+import { cn } from '@/shared/cn'
 
 const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(({ type = 'button', className, ...props }, ref) => {
   return (

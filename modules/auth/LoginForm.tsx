@@ -3,25 +3,35 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { loginAction } from '@/actions/auth/login.action'
 import Button from '@/components/ui/Button'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
-import { loginAction } from '@/modules/auth/login.action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
+
+const defaultValues: LoginValues = {
+  email: '',
+  password: ''
+}
 
 export default function LoginForm() {
   const form = useForm<LoginValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      password: ''
-    }
+    defaultValues
   })
 
+  const { formState } = form
+
   async function onSubmit(values: LoginValues) {
-    await loginAction(values)
+    try {
+      await loginAction(values)
+    } catch (error) {
+      form.setError('root', {
+        message: (error as Error).message || 'Login failed'
+      })
+    }
   }
 
   return (
@@ -35,8 +45,8 @@ export default function LoginForm() {
         </FormField>
       </div>
 
-      <Button type='submit' className='w-full'>
-        Log in
+      <Button type='submit' className='w-full' disabled={formState.isSubmitting}>
+        {formState.isSubmitting ? 'Logging in...' : 'Log in'}
       </Button>
 
       <p className='text-center text-sm text-neutral-600'>

@@ -2,8 +2,8 @@
 
 import { forwardRef, InputHTMLAttributes,useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import { cn } from '@/components/cn'
 import TextInput from '@/components/ui/TextInput'
+import { cn } from '@/shared/cn'
 
 const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ className, ...props }, ref) => {
   const [visible, setVisible] = useState(false)

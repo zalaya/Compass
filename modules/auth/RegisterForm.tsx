@@ -3,28 +3,38 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { cn } from '@/components/cn'
+import { registerAction } from '@/actions/auth/register.action'
 import Button from '@/components/ui/Button'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
-import { registerAction } from '@/modules/auth/register.action'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
+import { cn } from '@/shared/cn'
+
+const defaultValues: RegisterValues = {
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 
 export default function RegisterForm() {
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    }
+    defaultValues
   })
 
+  const { formState } = form
+
   async function onSubmit(values: RegisterValues) {
-    await registerAction(values)
+    try {
+      await registerAction(values)
+    } catch (error) {
+      form.setError('root', {
+        message: (error as Error).message || 'Login failed'
+      })
+    }
   }
 
   return (
@@ -44,8 +54,8 @@ export default function RegisterForm() {
         </FormField>
       </div>
 
-      <Button type='submit' className='w-full'>
-        Register
+      <Button type='submit' className='w-full' disabled={formState.isSubmitting}>
+        {formState.isSubmitting ? 'Registering...' : 'Register'}
       </Button>
 
       <p className='text-center text-sm text-neutral-600'>
