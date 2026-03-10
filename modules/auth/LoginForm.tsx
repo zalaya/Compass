@@ -11,7 +11,7 @@ import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
 import TextInput from '@/components/ui/Input/TextInput'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
-import {cn} from "@/shared/cn";
+import { cn } from '@/shared/cn'
 
 const defaultValues: LoginValues = {
   email: '',
