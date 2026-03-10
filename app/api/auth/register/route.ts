@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { authService } from '@/modules/auth/auth.service'
 import { registerSchema } from '@/modules/auth/schema'
 
 export async function POST(request: Request) {
@@ -12,5 +13,14 @@ export async function POST(request: Request) {
     )
   }
 
-  return NextResponse.json({ success: true })
+  try {
+    const { id, email } = await authService.register(result.data)
+
+    return NextResponse.json({ id, email })
+  } catch {
+    return NextResponse.json(
+      { error: 'User already exists' },
+      { status: 409 }
+    )
+  }
 }
