@@ -5,12 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { loginAction } from '@/actions/auth/login.action'
-import Button from '@/components/ui/Button'
+import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
-import PasswordInput from '@/components/ui/PasswordInput'
-import TextInput from '@/components/ui/TextInput'
+import PasswordInput from '@/components/ui/Input/PasswordInput'
+import TextInput from '@/components/ui/Input/TextInput'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
+import {cn} from "@/shared/cn";
 
 const defaultValues: LoginValues = {
   email: '',
@@ -23,7 +24,7 @@ export default function LoginForm() {
     defaultValues
   })
 
-  const { formState } = form
+  const { isSubmitting } = form.formState
 
   async function onSubmit(values: LoginValues) {
     try {
@@ -44,16 +45,16 @@ export default function LoginForm() {
         </FormField>
       </div>
 
-      <Button type='submit' className='w-full' disabled={formState.isSubmitting}>
-        {formState.isSubmitting ? 'Logging in...' : 'Log in'}
-      </Button>
+      <LoadingButton type='submit' className='w-full' loading={isSubmitting}>
+        Log in
+      </LoadingButton>
 
       <p className='text-center text-sm text-neutral-600'>
         Don't have an account?{' '}
-        <Link
-          href='/auth/register'
-          className='font-medium text-neutral-900 hover:underline'
-        >
+        <Link href='/auth/register' className={cn(
+          'font-medium text-neutral-900',
+          'hover:underline'
+        )}>
           Register
         </Link>
       </p>

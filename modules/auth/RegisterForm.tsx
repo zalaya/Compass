@@ -5,11 +5,11 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import { registerAction } from '@/actions/auth/register.action'
-import Button from '@/components/ui/Button'
+import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
-import PasswordInput from '@/components/ui/PasswordInput'
-import TextInput from '@/components/ui/TextInput'
+import PasswordInput from '@/components/ui/Input/PasswordInput'
+import TextInput from '@/components/ui/Input/TextInput'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 import { cn } from '@/shared/cn'
 
@@ -26,7 +26,7 @@ export default function RegisterForm() {
     defaultValues
   })
 
-  const { formState } = form
+  const { isSubmitting } = form.formState
 
   async function onSubmit(values: RegisterValues) {
     try {
@@ -53,9 +53,9 @@ export default function RegisterForm() {
         </FormField>
       </div>
 
-      <Button type='submit' className='w-full' disabled={formState.isSubmitting}>
-        {formState.isSubmitting ? 'Registering...' : 'Register'}
-      </Button>
+      <LoadingButton type='submit' className='w-full' loading={isSubmitting}>
+        Register
+      </LoadingButton>
 
       <p className='text-center text-sm text-neutral-600'>
         Already have an account?{' '}
