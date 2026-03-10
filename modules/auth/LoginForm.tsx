@@ -10,6 +10,7 @@ import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
+import {toast} from "sonner";
 
 const defaultValues: LoginValues = {
   email: '',
@@ -28,9 +29,7 @@ export default function LoginForm() {
     try {
       await loginAction(values)
     } catch (error) {
-      form.setError('root', {
-        message: (error as Error).message || 'Login failed'
-      })
+      toast.error('Login failed. Please check your credentials and try again.')
     }
   }
 

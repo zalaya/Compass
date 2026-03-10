@@ -11,6 +11,7 @@ import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 import { cn } from '@/shared/cn'
+import {toast} from "sonner";
 
 const defaultValues: RegisterValues = {
   name: '',
@@ -31,9 +32,7 @@ export default function RegisterForm() {
     try {
       await registerAction(values)
     } catch (error) {
-      form.setError('root', {
-        message: (error as Error).message || 'Login failed'
-      })
+      toast.error('Registration failed. Please check your input and try again.')
     }
   }
 
