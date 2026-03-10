@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import { loginAction } from '@/actions/auth/login.action'
 import Button from '@/components/ui/Button'
 import Form from '@/components/ui/Form/Form'
@@ -10,7 +11,6 @@ import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
-import {toast} from "sonner";
 
 const defaultValues: LoginValues = {
   email: '',

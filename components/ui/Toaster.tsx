@@ -6,7 +6,7 @@ export default function Toaster(props: ComponentProps<typeof SonnerToaster>) {
     <SonnerToaster
       richColors
       toastOptions={{
-        className: 'rounded-md border border-neutral-200 bg-white text-neutral-900 shadow-md',
+        className: 'rounded-md border border-neutral-200 bg-white text-neutral-900 shadow-md'
       }}
       {...props}
     />

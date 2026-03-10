@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { toast } from 'sonner'
 import { registerAction } from '@/actions/auth/register.action'
 import Button from '@/components/ui/Button'
 import Form from '@/components/ui/Form/Form'
@@ -11,7 +12,6 @@ import PasswordInput from '@/components/ui/PasswordInput'
 import TextInput from '@/components/ui/TextInput'
 import { registerSchema, RegisterValues } from '@/modules/auth/schema'
 import { cn } from '@/shared/cn'
-import {toast} from "sonner";
 
 const defaultValues: RegisterValues = {
   name: '',
