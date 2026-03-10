@@ -16,6 +16,10 @@ export const withTransaction = <T>(callback: (transaction: Prisma.TransactionCli
   return prisma.$transaction(callback)
 }
 
+export const getPrisma = (transaction?: Prisma.TransactionClient) => {
+  return transaction ?? prisma
+}
+
 if (process.env.NODE_ENV !== 'production') {
   global.prisma = prisma
 }

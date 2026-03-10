@@ -20,5 +20,7 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Lint codebase
         run: bun run lint
+      - name: Build prisma client
+        run: bun run prisma:generate
       - name: Build project
         run: bun run build
