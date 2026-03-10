@@ -1,7 +1,7 @@
 import { forwardRef, HTMLAttributes, useId } from 'react'
-import { FormItemContext } from '@/components/ui/form/form-item-context'
+import { FormItemContext } from '@/components/ui/Form/FormItem/FormItemContext'
 
-export const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
+const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(({ className, ...props }, ref) => {
   const id = useId()
 
   return (
@@ -15,3 +15,5 @@ export const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement
     </FormItemContext.Provider>
   )
 })
+
+export default FormItem

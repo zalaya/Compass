@@ -3,9 +3,9 @@
 import { forwardRef, InputHTMLAttributes,useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
 import { cn } from '@/components/cn'
-import { TextInput } from '@/components/ui/text-input'
+import TextInput from '@/components/ui/TextInput'
 
-export const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ className, ...props }, ref) => {
+const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ className, ...props }, ref) => {
   const [visible, setVisible] = useState(false)
 
   return (
@@ -32,3 +32,5 @@ export const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HT
     </div>
   )
 })
+
+export default PasswordInput

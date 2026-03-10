@@ -1,9 +1,9 @@
 import { ComponentProps } from 'react'
 import * as LabelPrimitive from '@radix-ui/react-label'
 import { cn } from '@/components/cn'
-import { useFormField } from '@/components/ui/form/use-form-field'
+import { useFormField } from '@/components/ui/Form/use-form-field'
 
-export const FormLabel = ({ className, ...props }: ComponentProps<typeof LabelPrimitive.Root>) =>  {
+export default function FormLabel({ className, ...props }: ComponentProps<typeof LabelPrimitive.Root>) {
   const { invalid, formItemId } = useFormField()
 
   return (

@@ -3,12 +3,12 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { Form } from '@/components/ui/form'
-import { FormField } from '@/components/ui/form/form-field'
-import { PasswordInput } from '@/components/ui/password-input'
-import { TextInput } from '@/components/ui/text-input'
-import { loginAction } from '@/modules/auth/login-action'
+import Button from '@/components/ui/Button'
+import Form from '@/components/ui/Form/Form'
+import FormField from '@/components/ui/Form/FormField/FormField'
+import PasswordInput from '@/components/ui/PasswordInput'
+import TextInput from '@/components/ui/TextInput'
+import { loginAction } from '@/modules/auth/login.action'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 
 export default function LoginForm() {

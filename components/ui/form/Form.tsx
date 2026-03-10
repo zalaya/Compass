@@ -6,7 +6,7 @@ type FormProps<T extends FieldValues> = PropsWithChildren<{
   onSubmit: SubmitHandler<T>
 } & Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>>
 
-export const Form = <T extends FieldValues>({ children, form, onSubmit, ...props }: FormProps<T>) => {
+export default function Form<T extends FieldValues>({ children, form, onSubmit, ...props }: FormProps<T>) {
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} {...props} >

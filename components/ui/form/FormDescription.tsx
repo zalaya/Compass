@@ -1,8 +1,8 @@
 import { HTMLAttributes } from 'react'
 import { cn } from '@/components/cn'
-import { useFormField } from '@/components/ui/form/use-form-field'
+import { useFormField } from '@/components/ui/Form/use-form-field'
 
-export const FormDescription = ({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) => {
+export default function FormDescription({ className, ...props }: HTMLAttributes<HTMLParagraphElement>) {
   const { formDescriptionId } = useFormField()
 
   return (

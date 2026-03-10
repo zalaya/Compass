@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/components/cn'
 
-export const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(({ type = 'button', className, ...props }, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLButtonElement>>(({ type = 'button', className, ...props }, ref) => {
   return (
     <button
       ref={ref}
@@ -18,3 +18,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonHTMLAttributes<HTMLBut
     />
   )
 })
+
+export default Button
