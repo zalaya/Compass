@@ -1,7 +1,7 @@
 'use server'
 
 import { signIn } from '@/auth'
-import { registerSchema, RegisterValues } from '@/modules/auth/schema'
+import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
 
 export async function registerAction(values: RegisterValues) {
   const { data, success } = registerSchema.safeParse(values)

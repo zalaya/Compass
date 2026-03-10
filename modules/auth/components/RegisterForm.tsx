@@ -8,7 +8,7 @@ import FormField from '@/components/ui/Form/FormField/FormField'
 import Input from '@/components/ui/Input/Input'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
 import { registerAction } from '@/modules/auth/actions/register.action'
-import { registerSchema, RegisterValues } from '@/modules/auth/schema'
+import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
 import { cn } from '@/shared/cn'
 import { useZodForm } from '@/shared/use-zod-form'
 

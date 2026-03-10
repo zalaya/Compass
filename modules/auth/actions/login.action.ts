@@ -1,7 +1,7 @@
 'use server'
 
 import { signIn } from '@/auth'
-import { LoginValues } from '@/modules/auth/schema'
+import { LoginValues } from '@/modules/auth/auth.schema'
 
 export async function loginAction(values: LoginValues) {
   await signIn('credentials', {

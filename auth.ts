@@ -1,7 +1,7 @@
 import Credentials from '@auth/core/providers/credentials'
 import NextAuth from 'next-auth'
+import { loginSchema } from '@/modules/auth/auth.schema'
 import { authService } from '@/modules/auth/auth.service'
-import { loginSchema } from '@/modules/auth/schema'
 
 export const { handlers, signIn } = NextAuth({
   providers: [
