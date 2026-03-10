@@ -9,7 +9,7 @@ import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
-import TextInput from '@/components/ui/Input/TextInput'
+import Input from '@/components/ui/Input/Input'
 import { loginSchema, LoginValues } from '@/modules/auth/schema'
 import { cn } from '@/shared/cn'
 
@@ -38,7 +38,7 @@ export default function LoginForm() {
     <Form form={form} onSubmit={onSubmit} schema={loginSchema} className='space-y-6'>
       <div className='space-y-4'>
         <FormField name='email' label='Email'>
-          <TextInput type='email' placeholder='email@example.com' />
+          <Input type='email' placeholder='email@example.com' />
         </FormField>
         <FormField name='password' label='Password'>
           <PasswordInput placeholder='12345678' />

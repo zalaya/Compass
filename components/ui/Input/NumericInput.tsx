@@ -3,7 +3,7 @@
 import { KeyboardEvent } from 'react'
 import { forwardRef, InputHTMLAttributes, useRef } from 'react'
 import { ChevronDown,ChevronUp } from 'lucide-react'
-import TextInput from '@/components/ui/Input/TextInput'
+import Input from '@/components/ui/Input/Input'
 import { cn } from '@/shared/cn'
 
 type NumericInputProps = InputHTMLAttributes<HTMLInputElement>
@@ -47,7 +47,7 @@ const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(({ classNam
 
   return (
     <div className='relative'>
-      <TextInput
+      <Input
         ref={(node) => {
           inputRef.current = node
 

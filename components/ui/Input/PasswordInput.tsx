@@ -2,7 +2,7 @@
 
 import { forwardRef, InputHTMLAttributes,useState } from 'react'
 import { Eye, EyeOff } from 'lucide-react'
-import TextInput from '@/components/ui/Input/TextInput'
+import Input from '@/components/ui/Input/Input'
 import { cn } from '@/shared/cn'
 
 const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInputElement>>(({ className, ...props }, ref) => {
@@ -10,7 +10,7 @@ const PasswordInput = forwardRef<HTMLInputElement, InputHTMLAttributes<HTMLInput
 
   return (
     <div className='relative'>
-      <TextInput
+      <Input
         ref={ref}
         type={visible ? 'text' : 'password'}
         className={cn(
