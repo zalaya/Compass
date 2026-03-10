@@ -14,9 +14,7 @@ export async function registerAction(values: RegisterValues) {
     body: JSON.stringify(data)
   })
 
-  if (!response.ok) {
-    throw new Error('Register failed')
-  }
+  if (!response.ok) throw new Error('Registration failed')
 
   await signIn('credentials', {
     email: data.email,
