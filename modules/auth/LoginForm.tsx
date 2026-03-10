@@ -35,7 +35,7 @@ export default function LoginForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
+    <Form form={form} onSubmit={onSubmit} schema={loginSchema} className='space-y-6'>
       <div className='space-y-4'>
         <FormField name='email' label='Email'>
           <TextInput type='email' placeholder='email@example.com' />
