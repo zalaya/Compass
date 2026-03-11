@@ -4,6 +4,28 @@ import { authService } from '@/modules/auth/auth.service'
 
 export async function POST(request: Request) {
   const body = await request.json()
+  const data = validateRequest(body)
+
+  if (data instanceof NextResponse) {
+    return data
+  }
+
+  try {
+    const user = await authService.register(data)
+
+    return NextResponse.json({
+      id: user.id,
+      email: user.email
+    })
+  } catch {
+    return NextResponse.json(
+      { error: 'User already exists' },
+      { status: 409 }
+    )
+  }
+}
+
+const validateRequest = (body: unknown) => {
   const result = registerSchema.safeParse(body)
 
   if (!result.success) {
@@ -13,14 +35,5 @@ export async function POST(request: Request) {
     )
   }
 
-  try {
-    const { id, email } = await authService.register(result.data)
-
-    return NextResponse.json({ id, email })
-  } catch {
-    return NextResponse.json(
-      { error: 'User already exists' },
-      { status: 409 }
-    )
-  }
+  return result.data
 }
