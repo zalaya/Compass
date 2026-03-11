@@ -1,19 +1,19 @@
 import { FormHTMLAttributes, PropsWithChildren } from 'react'
-import { FormProvider, SubmitHandler } from 'react-hook-form'
-import { z, ZodObject } from 'zod'
+import { FieldValues, FormProvider, SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { z } from 'zod'
 import FormError from '@/components/ui/Form/FormError'
 import { FormSchemaContext } from '@/components/ui/Form/FormSchemaContext'
-import { ZodFormReturn } from '@/shared/use-zod-form'
 
-type FormProps<TSchema extends ZodObject> = PropsWithChildren<{
-  form: ZodFormReturn<TSchema>
-  onSubmit: SubmitHandler<z.infer<TSchema>>
+type FormProps<T extends FieldValues> = PropsWithChildren<{
+  form: UseFormReturn<T>
+  schema?: z.ZodType
+  onSubmit: SubmitHandler<T>
   showError?: boolean
 } & Omit<FormHTMLAttributes<HTMLFormElement>, 'onSubmit'>>
 
-export default function Form<TSchema extends ZodObject>({ children, form, showError = true, onSubmit, ...props }: FormProps<TSchema>) {
+export default function Form<T extends FieldValues>({ children, form, schema, showError = false, onSubmit, ...props }: FormProps<T>) {
   return (
-    <FormSchemaContext.Provider value={form.schema}>
+    <FormSchemaContext.Provider value={schema}>
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} {...props}>
           {showError && <FormError />}

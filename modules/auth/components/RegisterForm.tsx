@@ -1,5 +1,7 @@
 'use client'
 
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import LoadingButton from '@/components/ui/Button/LoadingButton'
@@ -10,7 +12,6 @@ import PasswordInput from '@/components/ui/Input/PasswordInput'
 import { registerAction } from '@/modules/auth/actions/register.action'
 import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
 import { cn } from '@/shared/cn'
-import { useZodForm } from '@/shared/use-zod-form'
 
 const defaultValues: RegisterValues = {
   name: '',
@@ -20,8 +21,8 @@ const defaultValues: RegisterValues = {
 }
 
 export default function RegisterForm() {
-  const form = useZodForm({
-    schema: registerSchema,
+  const form = useForm<RegisterValues>({
+    resolver: zodResolver(registerSchema),
     defaultValues
   })
 
@@ -36,7 +37,7 @@ export default function RegisterForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
+    <Form form={form} onSubmit={onSubmit} schema={registerSchema} className='space-y-6'>
       <div className='space-y-4'>
         <FormField name='name' label='Name' render={({ field }) => (
           <Input placeholder='John Doe' {...field} />
