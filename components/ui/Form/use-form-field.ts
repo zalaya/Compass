@@ -15,7 +15,7 @@ export function useFormField() {
     throw new Error('useFormField must be used within <FormItem>')
   }
 
-  const { name } = formFieldContext
+  const { name, mandatory } = formFieldContext
   const { id } = formItemContext
   const { getFieldState } = useFormContext()
   const formState = useFormState({ name })
@@ -25,6 +25,7 @@ export function useFormField() {
     name,
     error,
     invalid,
+    mandatory,
     formItemId: `${id}-form-item`,
     formDescriptionId: `${id}-form-description`,
     formMessageId: `${id}-form-message`

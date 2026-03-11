@@ -8,6 +8,7 @@ type FormFieldContextValue<
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = {
   name: TName
+  mandatory?: boolean
 }
 
 export const FormFieldContext = createContext<FormFieldContextValue | undefined>(undefined)

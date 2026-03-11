@@ -34,12 +34,7 @@ export default function FormField<TFieldValues extends FieldValues, TName extend
         render={({ field }) => {
           return (
             <FormItem className={className}>
-              {label && (
-                <FormLabel>
-                  {label}
-                  {isMandatory && <span className='ml-1 text-red-500' aria-hidden={isMandatory}>*</span>}
-                </FormLabel>
-              )}
+              {label && <FormLabel>{label}</FormLabel>}
               <FormControl aria-required={isMandatory}>
                 {cloneElement(children, field)}
               </FormControl>

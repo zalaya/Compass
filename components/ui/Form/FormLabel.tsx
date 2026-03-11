@@ -5,8 +5,8 @@ import * as LabelPrimitive from '@radix-ui/react-label'
 import { useFormField } from '@/components/ui/Form/use-form-field'
 import { cn } from '@/shared/cn'
 
-export default function FormLabel({ className, ...props }: ComponentProps<typeof LabelPrimitive.Root>) {
-  const { invalid, formItemId } = useFormField()
+export default function FormLabel({ className, children, ...props }: ComponentProps<typeof LabelPrimitive.Root>) {
+  const { invalid, formItemId, mandatory } = useFormField()
 
   return (
     <LabelPrimitive.Root
@@ -18,6 +18,9 @@ export default function FormLabel({ className, ...props }: ComponentProps<typeof
         className
       )}
       {...props}
-    />
+    >
+      {children}
+      {mandatory && <span className='ml-1 text-red-500' aria-hidden={mandatory}>*</span>}
+    </LabelPrimitive.Root>
   )
 }
