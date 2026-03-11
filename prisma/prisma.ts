@@ -5,7 +5,7 @@ const global = globalThis as unknown as {
   prisma: PrismaClient | undefined
 }
 
-export const prisma = global.prisma ?? new PrismaClient({
+const prisma = global.prisma ?? new PrismaClient({
   adapter: new PrismaPg({ connectionString: process.env.DATASOURCE_URL }),
   log: process.env.NODE_ENV === 'development'
     ? ['query', 'error', 'warn']
@@ -16,7 +16,7 @@ export const withTransaction = <T>(callback: (transaction: Prisma.TransactionCli
   return prisma.$transaction(callback)
 }
 
-export const getPrisma = (transaction?: Prisma.TransactionClient) => {
+export const resolveClient = (transaction?: Prisma.TransactionClient) => {
   return transaction ?? prisma
 }
 
