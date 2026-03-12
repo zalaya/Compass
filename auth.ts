@@ -9,15 +9,11 @@ export const { handlers, signIn } = NextAuth({
       async authorize(credentials) {
         const { data, success } = loginSchema.safeParse(credentials)
 
-        if (!success || !data) {
-          return null
-        }
+        if (!success || !data) return null
 
         const user = await authService.login(data)
 
-        if (!user) {
-          return null
-        }
+        if (!user) return null
 
         return {
           id: user.id,

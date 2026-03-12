@@ -36,7 +36,11 @@ export default function RegisterForm() {
       router.push('/dashboard')
       toast.success('Registration successful. Welcome aboard.')
     } catch (error) {
-      toast.error('Registration failed. Please check your input and try again.')
+      const message = error instanceof Error
+        ? error.message
+        : 'Registration failed. Please check your input and try again.'
+
+      toast.error(message)
     }
   }
 

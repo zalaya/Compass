@@ -5,15 +5,21 @@ import { RegisterValues } from '@/modules/auth/auth.schema'
 import { authService } from '@/modules/auth/auth.service'
 
 export async function registerAction(values: RegisterValues) {
-  await authService.register(values)
+  try {
+    await authService.register(values)
 
-  const response = await signIn('credentials', {
-    email: values.email,
-    password: values.password,
-    redirect: false
-  })
+    const response = await signIn('credentials', {
+      email: values.email,
+      password: values.password,
+      redirect: false
+    })
 
-  if (response?.error) throw new Error('Login failed')
+    if (response?.error) throw new Error('Login failed')
 
-  return true
+    return true
+  } catch (error) {
+    if (error instanceof Error) throw new Error(error.message)
+
+    throw new Error('Registration failed')
+  }
 }
