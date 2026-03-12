@@ -35,14 +35,31 @@ export default function LoginForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} schema={loginSchema} className='space-y-6'>
+    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
       <div className='space-y-4'>
-        <FormField name='email' label='Email' render={({ field }) => (
-          <Input type='email' placeholder='email@example.com' {...field} />
-        )} />
-        <FormField name='password' label='Password' render={({ field }) => (
-          <PasswordInput placeholder='12345678' {...field} />
-        )} />
+        <FormField
+          name='email'
+          label='Email'
+          mandatory
+          render={({ field }) => (
+            <Input
+              type='email'
+              placeholder='email@example.com'
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          name='password'
+          label='Password'
+          mandatory
+          render={({ field }) => (
+            <PasswordInput
+              placeholder='12345678'
+              {...field}
+            />
+          )}
+        />
       </div>
 
       <LoadingButton type='submit' className='w-full' loading={isSubmitting}>

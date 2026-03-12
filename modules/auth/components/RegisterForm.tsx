@@ -37,20 +37,53 @@ export default function RegisterForm() {
   }
 
   return (
-    <Form form={form} onSubmit={onSubmit} schema={registerSchema} className='space-y-6'>
+    <Form form={form} onSubmit={onSubmit} className='space-y-6'>
       <div className='space-y-4'>
-        <FormField name='name' label='Name' render={({ field }) => (
-          <Input placeholder='John Doe' {...field} />
-        )} />
-        <FormField name='email' label='Email' render={({ field }) => (
-          <Input type='email' placeholder='email@example.com' {...field} />
-        )} />
-        <FormField name='password' label='Password' render={({ field }) => (
-          <PasswordInput placeholder='12345678' {...field} />
-        )} />
-        <FormField name='confirmPassword' label='Confirm password' render={({ field }) => (
-          <PasswordInput placeholder='12345678' {...field} />
-        )} />
+        <FormField
+          name='name'
+          label='Name'
+          mandatory
+          render={({ field }) => (
+            <Input
+              placeholder='John Doe'
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          name='email'
+          label='Email'
+          mandatory
+          render={({ field }) => (
+            <Input
+              type='email'
+              placeholder='email@example.com'
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          name='password'
+          label='Password'
+          mandatory
+          render={({ field }) => (
+            <PasswordInput
+              placeholder='12345678'
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          name='confirmPassword'
+          label='Confirm password'
+          mandatory
+          render={({ field }) => (
+            <PasswordInput
+              placeholder='12345678'
+              {...field}
+            />
+          )}
+        />
       </div>
 
       <LoadingButton type='submit' className='w-full' loading={isSubmitting}>
