@@ -9,7 +9,7 @@ import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import Input from '@/components/ui/Input/Input'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
-import { registerAction } from '@/modules/auth/actions/register.action'
+import { registerAction } from '@/actions/auth/register.action'
 import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
 import { cn } from '@/shared/cn'
 
