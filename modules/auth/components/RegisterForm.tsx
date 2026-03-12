@@ -3,13 +3,14 @@
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { registerAction } from '@/actions/auth/register.action'
 import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import Input from '@/components/ui/Input/Input'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
-import { registerAction } from '@/actions/auth/register.action'
 import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
 import { cn } from '@/shared/cn'
 
@@ -21,6 +22,7 @@ const defaultValues: RegisterValues = {
 }
 
 export default function RegisterForm() {
+  const router = useRouter()
   const form = useForm<RegisterValues>({
     resolver: zodResolver(registerSchema),
     defaultValues
@@ -31,6 +33,8 @@ export default function RegisterForm() {
   async function onSubmit(values: RegisterValues) {
     try {
       await registerAction(values)
+      router.push('/dashboard')
+      toast.success('Registration successful. Welcome aboard.')
     } catch (error) {
       toast.error('Registration failed. Please check your input and try again.')
     }

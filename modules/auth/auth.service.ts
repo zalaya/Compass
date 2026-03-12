@@ -24,10 +24,7 @@ export const authService = {
     const user = await userRepository.findByEmail(data.email)
 
     if (!user) return null
-
-    const isPasswordValid = await bcrypt.compare(data.password, user.password)
-
-    if (!isPasswordValid) return null
+    if (!await bcrypt.compare(data.password, user.password)) return null
 
     return user
   }

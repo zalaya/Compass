@@ -1,24 +1,19 @@
 'use server'
 
 import { signIn } from '@/auth'
-import { registerSchema, RegisterValues } from '@/modules/auth/auth.schema'
+import { RegisterValues } from '@/modules/auth/auth.schema'
+import { authService } from '@/modules/auth/auth.service'
 
 export async function registerAction(values: RegisterValues) {
-  const { data, success } = registerSchema.safeParse(values)
+  await authService.register(values)
 
-  if (!success) throw new Error('Invalid result')
-
-  const response = await fetch(`${process.env.APP_URL}/api/auth/register`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+  const response = await signIn('credentials', {
+    email: values.email,
+    password: values.password,
+    redirect: false
   })
 
-  if (!response.ok) throw new Error('Registration failed')
+  if (response?.error) throw new Error('Login failed')
 
-  await signIn('credentials', {
-    email: data.email,
-    password: data.password,
-    redirectTo: '/dashboard'
-  })
+  return true
 }

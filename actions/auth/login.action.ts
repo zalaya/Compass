@@ -4,9 +4,13 @@ import { signIn } from '@/auth'
 import { LoginValues } from '@/modules/auth/auth.schema'
 
 export async function loginAction(values: LoginValues) {
-  await signIn('credentials', {
+  const response = await signIn('credentials', {
     email: values.email,
     password: values.password,
-    redirectTo: '/dashboard'
+    redirect: false
   })
+
+  if (response?.error) throw new Error('Login failed')
+
+  return true
 }
