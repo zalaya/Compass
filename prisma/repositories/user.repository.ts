@@ -3,6 +3,7 @@ import { UserCreateInput, UserModel } from '@/generated/prisma/models/User'
 import { resolveClient } from '@/prisma/prisma'
 
 export const userRepository = {
+
   findByEmail: (email: string, transaction?: Prisma.TransactionClient): Promise<UserModel | null> => {
     const prisma = resolveClient(transaction)
 
@@ -10,6 +11,7 @@ export const userRepository = {
       where: { email }
     })
   },
+
   create: (data: UserCreateInput, transaction?: Prisma.TransactionClient): Promise<UserModel> => {
     const prisma = resolveClient(transaction)
 
@@ -17,4 +19,5 @@ export const userRepository = {
       data
     })
   }
+
 }

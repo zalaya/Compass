@@ -8,12 +8,13 @@
     "production": "next start",
     "clean": "bunx rimraf node_modules/ .next/ generated/",
     "update": "bunx npm-check-updates -u && bun install",
-    "lint": "eslint .",
-    "format": "eslint . --fix",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:rollback": "prisma migrate reset",
-    "prisma:deploy": "prisma migrate deploy"
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:studio": "prisma studio",
+    "lint": "eslint .",
+    "format": "eslint . --fix"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

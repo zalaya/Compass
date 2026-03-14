@@ -5,13 +5,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { loginAction } from '@/actions/auth/login.action'
 import LoadingButton from '@/components/ui/Button/LoadingButton'
 import Form from '@/components/ui/Form/Form'
 import FormField from '@/components/ui/Form/FormField/FormField'
 import Input from '@/components/ui/Input/Input'
 import PasswordInput from '@/components/ui/Input/PasswordInput'
-import { loginSchema, LoginValues } from '@/modules/auth/auth.schema'
+import { login } from '@/modules/auth/auth.actions'
+import { loginSchema, LoginValues } from '@/modules/auth/auth.schemas'
 import { cn } from '@/shared/cn'
 
 const defaultValues: LoginValues = {
@@ -30,7 +30,7 @@ export default function LoginForm() {
 
   async function onSubmit(values: LoginValues) {
     try {
-      await loginAction(values)
+      await login(values)
       router.push('/dashboard')
       toast.success('Login successful. Welcome back.')
     } catch (error) {

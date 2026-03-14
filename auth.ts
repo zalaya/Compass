@@ -1,9 +1,9 @@
 import Credentials from '@auth/core/providers/credentials'
 import NextAuth from 'next-auth'
-import { loginSchema } from '@/modules/auth/auth.schema'
+import { loginSchema } from '@/modules/auth/auth.schemas'
 import { authService } from '@/modules/auth/auth.service'
 
-export const { handlers, signIn } = NextAuth({
+export const { auth, handlers, signIn } = NextAuth({
   providers: [
     Credentials({
       async authorize(credentials) {
@@ -13,13 +13,9 @@ export const { handlers, signIn } = NextAuth({
 
         const user = await authService.login(data)
 
-        if (!user) return null
-
-        return {
-          id: user.id,
-          name: user.name,
-          email: user.email
-        }
+        return user
+          ? { id: user.id, name: user.name, email: user.email }
+          : null
       }
     })
   ],
