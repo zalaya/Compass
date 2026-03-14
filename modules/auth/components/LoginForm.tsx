@@ -34,11 +34,7 @@ export default function LoginForm() {
       router.push('/dashboard')
       toast.success('Login successful. Welcome back.')
     } catch (error) {
-      const message = error instanceof Error
-        ? error.message
-        : 'Login failed. Please check your credentials and try again.'
-
-      toast.error(message)
+      toast.error('Login failed. Please check your credentials and try again.')
     }
   }
 
